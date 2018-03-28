@@ -7,6 +7,8 @@ import android.support.test.runner.AndroidJUnit4;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.lang.annotation.Target;
+
 import static org.junit.Assert.*;
 
 /**
@@ -22,5 +24,20 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("com.example.haseeb.githubreporoomdatabase", appContext.getPackageName());
+
+
+/*
+        //https://api.apixu.com/v1/current.json?key=00a7b0e44e1f4b6dbfb111338180702&q=Paris
+        @GET("v1/current.json")
+        Call<WeatherList>getCurrent (@Query("key") String key, @Query("q") String q);
+
+
+        https://api.github.com/search/repositories?q=java
+
+        @Get(search/repositories)
+
+
+        */
+
     }
 }
