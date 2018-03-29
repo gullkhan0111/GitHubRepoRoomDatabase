@@ -1,9 +1,13 @@
 package com.example.haseeb.githubreporoomdatabase.data;
 
+import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
 import com.example.haseeb.githubreporoomdatabase.data.models.Item;
 import com.example.haseeb.githubreporoomdatabase.data.models.RepositoryModel;
+import com.example.haseeb.githubreporoomdatabase.database.AppDatabase;
+import com.example.haseeb.githubreporoomdatabase.database.MyRoomConnection;
 import com.example.haseeb.githubreporoomdatabase.provider.GetRetrofitObject;
 
 import java.util.List;
@@ -13,6 +17,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Respository {
+    AppDatabase database;
+    Context context;
+
+    public Respository(Context context) {
+        this.context=context;
+    }
 
     public void GettingAllRepos(String languageName, final AllRespositoryCallback callback) {
         GetRetrofitObject.getService().getAllRespos(languageName).enqueue(new Callback<RepositoryModel>() {
@@ -21,11 +31,15 @@ public class Respository {
                 try {
 
                     callback.GettingSuccessResponce();
-                    Log.d("lang name",response.body().getItems().get(0).getFullName());
+                    Log.d("lang name",response.body().getItems().get(0).getFull_name());
                     List<Item> repositoryModels =response.body().getItems();
                     callback.GettingRespositoryList(repositoryModels);
-
-
+                    Item item = new Item();
+                    for(int i=0;i<repositoryModels.size();i++) {
+                        item.setFull_name(repositoryModels.get(0).getFull_name());
+                        MyRoomConnection.getDb(context).repoDao().insert(item);
+                    }
+                  callback.GettingjavaListFromRoom(database.repoDao().getAllRepos());
 
                 }catch (NullPointerException ex){
                     callback.GettingEmptyRepository();
@@ -65,11 +79,13 @@ public class Respository {
         });
     }
 
+
     public interface AllRespositoryCallback {
        void GettingRespositoryList(List<Item> repoModels);
         void GettingSuccessResponce();
         void GettingEmptyRepository();
         void GettingErrorRepository();
+        void GettingjavaListFromRoom(List<Item> items);
     }
     public  interface AllKootlinRepositoryCallback{
 

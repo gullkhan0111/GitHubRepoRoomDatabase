@@ -34,9 +34,9 @@ public class KotlinFragment extends Fragment implements RespsitoryView {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        presenter = new KotlinPresenterImpl(new Respository(), this);
+        presenter = new KotlinPresenterImpl(new Respository(getContext()), this);
         recyclerVie = view.findViewById(R.id.fragment_kotlin_recylerView);
-        loadingKotlinRepos=view.findViewById(R.id.fragment_java_pg);
+        loadingKotlinRepos = view.findViewById(R.id.fragment_java_pg);
         loadingKotlinRepos.setVisibility(View.VISIBLE);
         recyclerVie.setLayoutManager(new LinearLayoutManager(getContext()));
         presenter.GettingKootlinRepos("kotlin");
@@ -66,6 +66,12 @@ public class KotlinFragment extends Fragment implements RespsitoryView {
     public void GettingSuccessResponce() {
         Toast.makeText(getContext(), "kotlin Repository Success", Toast.LENGTH_SHORT).show();
         loadingKotlinRepos.setVisibility(View.INVISIBLE);
+
+    }
+
+    @Override
+    public void GettingListFromRoomDatabase(List<Item> items) {
+
 
     }
 }

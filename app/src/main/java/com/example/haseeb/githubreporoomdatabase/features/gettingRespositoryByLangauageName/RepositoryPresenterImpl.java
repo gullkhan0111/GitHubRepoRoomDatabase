@@ -40,4 +40,10 @@ public class RepositoryPresenterImpl implements Respository.AllRespositoryCallba
     public void GettingErrorRepository() {
         respsitoryViewl.GettingErrorRespository();
     }
+
+    @Override
+    public void GettingjavaListFromRoom(List<Item> items) {
+        respsitoryViewl.GettingListFromRoomDatabase(items);
+
+    }
 }

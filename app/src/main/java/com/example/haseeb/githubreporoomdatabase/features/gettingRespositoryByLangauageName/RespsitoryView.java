@@ -13,4 +13,5 @@ public interface RespsitoryView {
     void GettingEmptyRepository();
     void GettingErrorRespository();
     void GettingSuccessResponce();
+    void GettingListFromRoomDatabase(List<Item>items);
 }

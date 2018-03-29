@@ -37,7 +37,7 @@ class KotlinAdpater extends RecyclerView.Adapter <KotlinAdpater.KotlinViewHoolde
 
     @Override
     public void onBindViewHolder(KotlinViewHoolder holder, int position) {
-        holder.kotlinRepoName.setText(items.get(0).getFullName().toString());
+        holder.kotlinRepoName.setText(items.get(0).getFull_name());
 //        holder.watchers.setText(items.get(0).getWatchers());
   //      holder.star.setText(items.get(0).getStargazersCount());
 

@@ -35,7 +35,7 @@ class JavaRepoAdapter extends RecyclerView.Adapter <JavaRepoAdapter.JavaViewHold
 
     @Override
     public void onBindViewHolder(JavaViewHolder holder, int position) {
-        holder.fragment_java_tv_name.setText(items.get(0).getFullName().toString());
+        holder.fragment_java_tv_name.setText(items.get(0).getFull_name());
 
     }
 
