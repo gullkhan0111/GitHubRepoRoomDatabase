@@ -1,4 +1,4 @@
-package com.example.haseeb.githubreporoomdatabase;
+package com.example.haseeb.githubreporoomdatabase.provider;
 
 
 import retrofit2.Retrofit;

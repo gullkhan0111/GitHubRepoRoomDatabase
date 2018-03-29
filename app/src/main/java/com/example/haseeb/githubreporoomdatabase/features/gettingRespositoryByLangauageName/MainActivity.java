@@ -1,4 +1,4 @@
-package com.example.haseeb.githubreporoomdatabase;
+package com.example.haseeb.githubreporoomdatabase.features.gettingRespositoryByLangauageName;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -7,19 +7,27 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.example.haseeb.githubreporoomdatabase.R;
+import com.example.haseeb.githubreporoomdatabase.data.Respository;
+import com.example.haseeb.githubreporoomdatabase.data.models.Item;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements RespsitoryView {
+public class MainActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
     ViewPager viewPager;
+    ProgressBar loadingbar;
 
-    RepositoryPresenterImpl presenter;
+
+
     Button searchRespo;
     EditText seatchlanguage;
 
@@ -29,20 +37,16 @@ public class MainActivity extends AppCompatActivity implements RespsitoryView {
         setContentView(R.layout.activity_main);
         tabLayout = findViewById(R.id.activity_tab_layout);
         viewPager = findViewById(R.id.activity_main_ViewPager);
+
+
+
+
         tabLayout.addTab(tabLayout.newTab().setText("Java"));
         tabLayout.addTab(tabLayout.newTab().setText("Kotlin"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        searchRespo = findViewById(R.id.activity_main_searchBtn);
-        seatchlanguage = findViewById(R.id.activity_main_Edit_SearchRepositoryByName);
-        searchRespo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.GettingLangiageName(seatchlanguage.getText().toString());
-            }
-        });
 
 
-        presenter = new RepositoryPresenterImpl(new Model(), this);
+
         PaggerAdapter adapter = new PaggerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(2);
@@ -68,21 +72,7 @@ public class MainActivity extends AppCompatActivity implements RespsitoryView {
 
     }
 
-    @Override
-    public void GettingRepositoryList(List<RespoModel> respoModels) {
-        Toast.makeText(getApplicationContext(), "reponce sucess", Toast.LENGTH_SHORT).show();
 
-    }
-
-    @Override
-    public void GettingEmptyRepository() {
-        Toast.makeText(getApplicationContext(), " Empty reponce sucess", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void GettingErrorRespository() {
-        Toast.makeText(getApplicationContext(), " Error in reponce ", Toast.LENGTH_SHORT).show();
-    }
 
     private class PaggerAdapter extends FragmentStatePagerAdapter {
         int number;
@@ -102,13 +92,15 @@ public class MainActivity extends AppCompatActivity implements RespsitoryView {
                 case 1:
                     KotlinFragment kotlinFragment = new KotlinFragment();
                     return kotlinFragment;
+                    default:
+                        return null;
             }
-            return null;
+
         }
 
         @Override
         public int getCount() {
-            return 0;
+            return number;
         }
     }
 }
